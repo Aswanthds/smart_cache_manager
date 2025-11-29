@@ -1,0 +1,39 @@
+name: Smart Cache CI
+
+# Trigger: When do we want this to run?
+on:
+  push:
+    branches: [ "production" ]
+  pull_request:
+    branches: [ "production" ]
+
+# The Job: The actual work
+jobs:
+  build:
+    runs-on: ubuntu-latest # The robot uses a Linux machine
+
+    steps:
+      # 1. Check out the code (download it to the robot)
+      - uses: actions/checkout@v3
+
+      # 2. Install Flutter on the robot
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      # 3. Get dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # 4. Check Formatting (The thing that cost you points!)
+      # This fails if code is not formatted correctly.
+      - name: Check Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # 5. Check for basic errors (Linting)
+      - name: Analyze Code
+        run: flutter analyze
+
+      # 6. Run your Unit Tests (The logic check)
+      - name: Run Tests
+        run: flutter test
