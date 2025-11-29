@@ -37,3 +37,6 @@ jobs:
       # 6. Run your Unit Tests (The logic check)
       - name: Run Tests
         run: flutter test
+
+      - name: Publish Package
+        run: dart pub publish 
