@@ -211,10 +211,11 @@ packages:
   smart_cache_manager:
     dependency: "direct main"
     description:
-      path: "/Users/welcome/Desktop/Personal/smart_cache_manager"
-      relative: false
-    source: path
-    version: "0.0.1"
+      name: smart_cache_manager
+      sha256: "05d7e11aa142f8564cbd55c52df6778244cdd8ef03b8fb214fa6ca2838b93e8f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   source_span:
     dependency: transitive
     description:
