@@ -88,13 +88,13 @@ abstract class SmartCacheBase {
   /// **Side Effect**:
   /// If the item is valid, this triggers [EvictionManager.updateUsage],
   /// moving the item to the front of the queue (if using LRU strategy).
-  Future<T?> get<T>({ required String key});
+  Future<T?> get<T>({required String key});
 
   /// Removes a specific item from the cache.
   ///
   /// This deletes the physical file from the disk and removes the entry
   /// from the internal memory tracking (LRU/FIFO list).
-  Future<void> remove( {required String key});
+  Future<void> remove({required String key});
 
   /// Wipes the entire cache.
   ///
