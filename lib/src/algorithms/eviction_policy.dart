@@ -58,7 +58,11 @@ class LRUEvictionManager {
   }
 
   /// Checks capacity and evicts the LRU (Tail) if necessary.
-  void evictIfNeeded() {
+  /// Checks capacity and evicts the LRU (Tail) if necessary.
+  /// Returns a list of keys that were removed so the StorageEngine can delete them.
+  List<String> evictIfNeeded() {
+    List<String> evictedKeys = [];
+
     // While loop handles rare cases where we might be over capacity by >1
     while (_cacheMap.length > capacity && _tail != null) {
       final victim = _tail!;
@@ -67,8 +71,11 @@ class LRUEvictionManager {
       _removeNode(victim);
       _cacheMap.remove(victim.key);
 
-      // print('LRU Eviction: Removed ${victim.key}');
+      // Add to our list of victims
+      evictedKeys.add(victim.key);
     }
+
+    return evictedKeys;
   }
 
   // --- INTERNAL LINKED LIST HELPERS (The O(1) Logic) ---
