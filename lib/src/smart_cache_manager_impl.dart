@@ -85,7 +85,11 @@ class SmartCacheManagerImpl implements SmartCacheBase {
 
     // c. Update LRU list and check capacity (Memory Logic)
     _evictionManager.put(newEntry);
-    _evictionManager.evictIfNeeded();
+
+    for (final evictedKey in _evictionManager.evictIfNeeded()) {
+      await _storageEngine.delete(evictedKey);
+      // print("Sync: Deleted evicted file for $evictedKey");
+    }
   }
 
   // 3. The GET method: reads, validates, and updates LRU
