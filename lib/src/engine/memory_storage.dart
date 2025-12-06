@@ -1,24 +1,39 @@
-class MemoryStorageEngine {
+import 'package:smart_cache_manager/src/engine/storage_scope.dart';
+
+class MemoryStorageEngine implements StorageEngine {
   // The "Database" is just a variable in RAM
   final Map<String, Map<String, dynamic>> _memory = {};
 
-  Future<void> init() async {
+  @override
+  Future<void> init(bool isPersistent) async {
     // RAM needs no setup!
   }
 
-  Future<void> write(String key, Map<String, dynamic> data) async {
-    _memory[key] = data;
-  }
-
-  Future<Map<String, dynamic>?> read(String key) async {
+  @override
+  Future<Map<String, dynamic>?> read({required String key}) async {
     return _memory[key];
   }
 
-  Future<void> delete(String key) async {
+  @override
+  Future<void> delete({required String key}) async {
     _memory.remove(key);
   }
 
+  @override
   Future<void> clearAll() async {
     _memory.clear();
+  }
+
+  @override
+  Future<List<String>> getAllKeys() async {
+    return _memory.keys.toList();
+  }
+
+  @override
+  Future<void> write({
+    required String key,
+    required Map<String, dynamic> data,
+  }) async {
+    _memory[key] = data;
   }
 }

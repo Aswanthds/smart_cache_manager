@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
+import 'package:smart_cache_manager/src/engine/storage_scope.dart';
 
-class FileStorageEngine {
+class FileStorageEngine implements StorageEngine {
   // This holds the path to your cache directory
   late final Directory _cacheDir;
 
   // Initialize the engine by finding the correct OS path
+  @override
   Future<void> init(bool isPersistent) async {
     if (isPersistent) {
       _cacheDir = await getApplicationDocumentsDirectory();
@@ -16,6 +18,7 @@ class FileStorageEngine {
   }
 
   // Get a list of all keys currently stored on disk
+  @override
   Future<List<String>> getAllKeys() async {
     if (!await _cacheDir.exists()) return [];
 
@@ -32,14 +35,19 @@ class FileStorageEngine {
   }
 
   // Brief: Writes data to a file. Requires JSON encoding.
-  Future<void> write(String key, Map<String, dynamic> data) async {
+  @override
+  Future<void> write({
+    required String key,
+    required Map<String, dynamic> data,
+  }) async {
     final file = File('${_cacheDir.path}/$key.cache');
     final jsonString = jsonEncode(data);
     await file.writeAsString(jsonString);
   }
 
   // Brief: Reads data from a file. Returns null if not found.
-  Future<Map<String, dynamic>?> read(String key) async {
+  @override
+  Future<Map<String, dynamic>?> read({required String key}) async {
     try {
       final file = File('${_cacheDir.path}/$key.cache');
       final contents = await file.readAsString();
@@ -51,13 +59,15 @@ class FileStorageEngine {
   }
 
   // Brief: Deletes a specific file.
-  Future<void> delete(String key) async {
+  @override
+  Future<void> delete({required String key}) async {
     final file = File('${_cacheDir.path}/$key.cache');
     if (await file.exists()) {
       await file.delete();
     }
   }
 
+  @override
   Future<void> clearAll() async {
     // Check if directory exists first
     if (await _cacheDir.exists()) {
@@ -71,3 +81,5 @@ class FileStorageEngine {
     }
   }
 }
+
+StorageEngine getPersistentEngine() => FileStorageEngine();

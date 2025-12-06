@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:smart_cache_manager/smart_cache_manager.dart';
 
@@ -45,7 +47,7 @@ class _CacheTestScreenState extends State<CacheTestScreen> {
     setState(() {
       _logs += "$message\n";
     });
-    print(message);
+    log(message);
   }
 
   // TEST 1: Add Items
@@ -69,7 +71,7 @@ class _CacheTestScreenState extends State<CacheTestScreen> {
   }
 
   final cache = SmartCache.instance;
-
+ 
   Future<void> _readItems() async {
     _log("--- Reading Back ---");
 
@@ -77,12 +79,6 @@ class _CacheTestScreenState extends State<CacheTestScreen> {
       key: 'user_profile',
     );
     _log("Read user_profile: $cachedData ");
-
-    final b = await cache.get<String>(key: 'B');
-    _log("Read B: $b (Expected: Beta)");
-
-    final d = await cache.get<String>(key: 'D');
-    _log("Read D: $d (Expected: Delta)");
   }
 
   @override

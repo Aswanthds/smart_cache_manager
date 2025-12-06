@@ -1,6 +1,6 @@
 name: smart_cache_manager
 description: A smart, persistent caching library for Flutter. Supports LRU & FIFO eviction, auto-expiry (TTL), and flexible storage (Disk or RAM).
-version: 1.0.3
+version: 1.1.0
 homepage: https://github.com/Aswanthds/smart_cache_manager
 issue_tracker: https://github.com/Aswanthds/smart_cache_manager/issues
 
@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  idb_shim: ^2.6.7+1
   path_provider: ^2.1.5
 
 dev_dependencies:

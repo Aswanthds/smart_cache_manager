@@ -13,6 +13,7 @@ It persists data to the disk (so it survives app restarts) but automatically cle
 * **🧠 Smart Eviction:** Automatically removes the least recently used items when capacity is reached.
 * **💾 Persistent:** Saves data to the device's file system (Disk) by default.
 * **🔄 Smart Rehydration:** On app startup, it reads the disk, removes expired items, and restores the LRU order perfectly.
+* **🌐 Web Ready:** Uses IndexedDB automatically on the web for true persistence (no local storage limits).
 * **⚡ RAM Support:** Optional in-memory storage for ultra-fast, volatile access.
 * **⏰ Auto-Expiry:** Set a "Time-to-Live" (TTL) for items. Stale items are deleted automatically.
 * **🛡️ Crash Proof:** Detects and safely deletes corrupted files (e.g., from a crash during write) to prevent app crashes.
