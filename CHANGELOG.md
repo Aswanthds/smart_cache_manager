@@ -1,6 +1,6 @@
-## 1.0.5
-* Fix some eviction policy issues.
-* Clears test run with all tests passed.
+## 1.0.3
+* Updated Readme.md with latest changes
+
 ## 1.0.2
 * Fix some eviction policy issues.
 * Clears test run with all tests passed.
