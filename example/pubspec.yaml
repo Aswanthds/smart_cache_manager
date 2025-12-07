@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   smart_cache_manager:
-    path: "/Users/welcome/Desktop/Personal/smart_cache_manager"
+    git: "https://github.com/Aswanthds/smart_cache_manager"
   flutter:
     sdk: flutter
 
